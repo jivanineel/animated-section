@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>animated-section</title>
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <div class="banner-section">
+      <div class="container">
+        <div class="position-relative">
+          <div class="world-image" style="background-color: black; border-radius: 20px">
+            <img src="assets/image/world.png" alt="world" class="img-fluid"/>
+          </div>
+          <div class="scale-sect d-flex align-items-end">
+            <p class="sect-text">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem
+              nisi numquam voluptas saepe ipsum inventore placeat, non totam.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/font-awesome.js"></script>
+    <script src="assets/js/gsap-js.js"></script>
+    <script src="assets/js/scroll-trigger.js"></script>
+    <script src="assets/js/split-text.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        gsap.config({ trialWarn: false });
+        gsap.registerPlugin(ScrollTrigger, SplitText);
+
+        let scaleAnimation = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".banner-section",
+            start: "top 40",
+            end: "bottom 40",
+            scrub: 2,
+            pin: true,
+            duration: 40,
+          },
+        });
+
+        scaleAnimation.fromTo(
+          ".scale-sect",
+          {
+            opacity: 0,
+            duration: 6,
+          },
+          {
+            opacity: 1,
+            duration: 6,
+          }
+        );
+
+        scaleAnimation.fromTo(
+          ".scale-sect",
+          {
+            width: "10%",
+            height: "20%",
+            duration: 5,
+          },
+          {
+            width: "100%",
+            height: "100%",
+            duration: 5,
+          }
+        );
+
+        // scaleAnimation.fromTo(
+        //   ".sect-text",
+        //   {
+        //     opacity: 0,
+        //   },
+        //   {
+        //     opacity: 1,
+        //   }
+        // );
+
+        (mySplitText = new SplitText(".sect-text", { type: "words,chars" })),
+          (chars = mySplitText.chars);
+
+        chars = chars.sort(() => Math.random() - 0.5);
+
+        scaleAnimation.from(chars, {
+          duration: 0.5,
+          delay: 0.5,
+          opacity: 0,
+          ease: "power2.out",
+          stagger: 0.01,
+        });
+      });
+    </script>
+  </body>
+</html>

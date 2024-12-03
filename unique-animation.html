@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unique-Animation</title>
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body style="background-color: black; overflow-x: hidden">
+    <div class="main-part">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 mx-auto">
+            <div class="left-side">
+              <img
+                id="animatedImage"
+                src="assets/image/world.png"
+                alt="world-image"
+                class="img-fluid"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-marker">
+      <div class="container">
+        <div class="d-flex gap-2">
+          <div class="col-lg-4">
+            <div class="card">
+              <img
+                src="assets/image/global-bg.png"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card">
+              <img
+                src="assets/image/global-bg.png"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card">
+              <img
+                src="assets/image/global-bg.png"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/font-awesome.js"></script>
+    <script src="assets/js/gsap-js.js"></script>
+    <script src="assets/js/scroll-trigger.js"></script>
+    <script src="assets/js/split-text.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        gsap.config({ trialWarn: false });
+        gsap.registerPlugin(ScrollTrigger, SplitText);
+
+        const images = [
+          "assets/image/world.png",
+          "assets/image/global-bg.png",
+          "assets/image/world.png",
+          "assets/image/global-bg.png",
+          "assets/image/world.png",
+          "assets/image/global-bg.png",
+        ];
+
+        let currentImageIndex = 0;
+        function switchImage() {
+          currentImageIndex++;
+
+          if (currentImageIndex >= images.length) {
+            currentImageIndex = 0;
+          }
+
+          document.getElementById("animatedImage").src =
+            images[currentImageIndex];
+        }
+
+        let animation = gsap.timeline({
+          repeat: -1,
+          repeatDelay: 0.5,
+          onRepeat: switchImage,
+        });
+
+        animation
+          .to(".left-side img", {
+            y: 400,
+            delay: 10,
+            duration: 5,
+            onComplete: () => {
+              switchImage();
+            },
+          })
+          .to(".left-side img", {
+            y: 0,
+            duration: 5,
+          });
+      });
+    </script>
+  </body>
+</html>
